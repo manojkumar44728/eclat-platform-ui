@@ -1,7 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import ProtectedRoute from '@/app/routes/ProtectedRoute';
-import PublicRoute from '@/app/routes/PublicRoute';
+// import PublicRoute from '@/app/routes/PublicRoute';
+import AppLayout from '@/components/layout/AppLayout';
 import LoginPage from '@/features/auth/LoginPage';
 export const router = createBrowserRouter([
   {
@@ -11,17 +12,19 @@ export const router = createBrowserRouter([
 
   // Public Routes
   {
-    element: <PublicRoute />,
+    path: '/login',
+    element: <LoginPage />,
+  },
+
+  // App Routes
+  {
+    path: '/app',
+    element: <AppLayout />,
     children: [
-      {
-        element: <AuthLayout />,
-        children: [
-          {
-            path: '/login',
-            element: <LoginPage />,
-          },
-        ],
-      },
+      // {
+      //   index: true,
+      //   element: <Navigate to="/dashboard" replace />,
+      // },
     ],
   },
 
@@ -29,19 +32,19 @@ export const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
-      {
-        element: <DashboardLayout />,
-        children: [
-          {
-            path: '/dashboard',
-            element: <DashboardPage />,
-          },
-          {
-            path: '/users',
-            element: <UsersPage />,
-          },
-        ],
-      },
+      // {
+      //   element: <DashboardLayout />,
+      //   children: [
+      //     {
+      //       path: '/dashboard',
+      //       element: <DashboardPage />,
+      //     },
+      //     {
+      //       path: '/users',
+      //       element: <UsersPage />,
+      //     },
+      //   ],
+      // },
     ],
   },
 

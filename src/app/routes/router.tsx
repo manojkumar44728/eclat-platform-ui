@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import ProtectedRoute from '@/app/routes/ProtectedRoute';
+import DataTable from '@/components/common/DataTable/DataTable';
 // import PublicRoute from '@/app/routes/PublicRoute';
 import AppLayout from '@/components/layout/AppLayout';
 import LoginPage from '@/features/auth/LoginPage';
@@ -14,6 +15,11 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />,
+  },
+
+    {
+    path: '/table',
+    element: <DataTable />,
   },
 
   // App Routes

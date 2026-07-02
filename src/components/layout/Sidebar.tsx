@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import {
   LayoutDashboard,
   Settings,
-  User,
+  User
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 

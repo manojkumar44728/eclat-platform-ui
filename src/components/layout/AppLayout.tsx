@@ -1,4 +1,4 @@
-import Footer from '@components/layout/Footer';
+// import Footer from '@components/layout/Footer';
 import Header from '@components/layout/Header';
 import PageContainer from '@components/layout/PageContainer';
 import Sidebar from '@components/layout/Sidebar';

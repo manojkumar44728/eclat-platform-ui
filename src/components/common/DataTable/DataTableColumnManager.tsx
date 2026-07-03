@@ -24,8 +24,11 @@ export const DataTableColumnManager: React.FC<DataTableColumnManagerProps> = ({
   // Sort columns by order for display
   const sortedColumns = [...columns].sort((a, b) => a.order - b.order);
 
-  const handleDragStart = (index: number) => {
+  const handleDragStart = (index: number, e?: React.DragEvent) => {
     setDraggedIndex(index);
+    if (e?.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move';
+    }
   };
 
   const handleDragOver = (e: React.DragEvent, index: number) => {
@@ -52,8 +55,11 @@ export const DataTableColumnManager: React.FC<DataTableColumnManagerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-md max-h-[80vh] flex flex-col">
+    <div className="fixed inset-0 z-50">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
+      {/* Drawer */}
+      <div className="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-lg flex flex-col">
         {/* Header */}
         <div className="flex justify-between items-center p-4 border-b sticky top-0 bg-white">
           <h2 className="text-lg font-semibold text-gray-800">Manage Columns</h2>
@@ -72,21 +78,23 @@ export const DataTableColumnManager: React.FC<DataTableColumnManagerProps> = ({
           {sortedColumns.map((column, index) => (
             <div
               key={column.id}
-              draggable
-              onDragStart={() => handleDragStart(index)}
               onDragOver={(e) => handleDragOver(e, index)}
               onDragLeave={handleDragLeave}
               onDrop={(e) => handleDrop(e, index)}
               onDragEnd={handleDragEnd}
               className={`
-                flex items-center gap-3 p-3 rounded-lg transition-colors
+                flex items-center gap-3 p-3 rounded-lg transition-colors border-2
                 ${draggedIndex === index ? 'opacity-50' : ''}
-                ${dragOverIndex === index ? 'bg-blue-50 border-2 border-blue-300' : 'border-2 border-transparent'}
-                hover:bg-gray-50 cursor-move
+                ${dragOverIndex === index ? 'bg-blue-50 border-blue-300' : 'border-transparent'}
+                hover:bg-gray-50
               `}
             >
               {/* Drag Handle */}
-              <div className="flex-shrink-0 text-gray-400 hover:text-gray-600">
+              <div
+                draggable
+                onDragStart={(e) => handleDragStart(index, e)}
+                className="shrink-0 text-gray-400 hover:text-gray-600 cursor-move"
+              >
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
@@ -110,7 +118,7 @@ export const DataTableColumnManager: React.FC<DataTableColumnManagerProps> = ({
               </span>
 
               {/* Order Badge */}
-              <span className="flex-shrink-0 bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded">
+              <span className="shrink-0 bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded">
                 {index + 1}
               </span>
             </div>

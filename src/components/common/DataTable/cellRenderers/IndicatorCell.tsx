@@ -1,5 +1,5 @@
 import React from 'react';
-import { CellRendererProps } from '../types';
+import type { CellRendererProps } from '../types';
 
 export const IndicatorCell: React.FC<CellRendererProps> = ({ value }) => {
   // value expected to be a color name or hex

@@ -8,21 +8,16 @@ import {
   ButtonsCell,
   CheckboxCell,
 } from './cellRenderers';
+import { IndicatorCell } from './cellRenderers';
 import { getCellValue } from './utils';
 
 interface DataTableCellProps<T = any> extends Omit<CellRendererProps<T>, 'value' | 'column'> {
   column: Column<T>;
   row: T;
-  isSelected?: boolean;
   onToggleSelect?: (selected: boolean) => void;
 }
 
-export const DataTableCell: React.FC<DataTableCellProps> = ({
-  column,
-  row,
-  isSelected,
-  onToggleSelect,
-}) => {
+export const DataTableCell: React.FC<DataTableCellProps> = ({ column, row, onToggleSelect }) => {
   const value = getCellValue(row, column);
 
   // Use custom renderer if provided
@@ -45,9 +40,6 @@ export const DataTableCell: React.FC<DataTableCellProps> = ({
         <ToggleCell
           {...commonProps}
           label={column.toggleLabel}
-          onChange={(newValue) => {
-            // You can add callback logic here
-          }}
         />
       );
 

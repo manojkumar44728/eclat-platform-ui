@@ -74,6 +74,20 @@ export function DataTableExample() {
   const columns: Column<Product>[] = useMemo(
     () => [
       {
+        id: 'indicator',
+        header: '',
+        accessor: (row: Product) => {
+          // Map status to a color dot
+          if (row.status === 'active') return 'bg-green-500';
+          if (row.status === 'pending') return 'bg-yellow-500';
+          if (row.status === 'inactive') return 'bg-red-500';
+          return 'bg-gray-400';
+        },
+        type: 'indicator',
+        width: '40px',
+        order: -1,
+      },
+      {
         id: 'name',
         header: 'Product Name',
         accessor: 'name',
@@ -117,6 +131,14 @@ export function DataTableExample() {
         type: 'checkbox',
         width: '100px',
         order: 4,
+      },
+      {
+        id: 'sku',
+        header: 'SKU',
+        accessor: (r: Product) => `SKU-${r.id}`,
+        type: 'text',
+        width: '120px',
+        order: 5,
       },
       {
         id: 'price',

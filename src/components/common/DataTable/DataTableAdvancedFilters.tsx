@@ -73,23 +73,25 @@ export const DataTableAdvancedFilters: React.FC<DataTableAdvancedFiltersProps> =
           return (
             <div key={column.id} className="border-b pb-4 last:border-b-0 last:pb-0">
               <h4 className="font-medium text-gray-700 mb-3">{column.header}</h4>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                {values.map((value, idx) => (
-                  <label key={`${column.id}-${idx}`} className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={activeValues.includes(value)}
-                      onChange={(e) =>
-                        handleCheckboxChange(column.id, value, e.target.checked)
-                      }
-                      className="w-4 h-4 accent-blue-600"
-                    />
-                    <span className="text-sm text-gray-700">
-                      {String(value)}
-                    </span>
-                  </label>
-                ))}
-              </div>
+                  <div className="border rounded bg-gray-50 p-2 max-h-40 overflow-y-auto">
+                    <div className="space-y-2">
+                      {values.map((value, idx) => (
+                        <label key={`${column.id}-${idx}`} className="flex items-center gap-2 cursor-pointer p-1 rounded hover:bg-white">
+                          <input
+                            type="checkbox"
+                            checked={activeValues.includes(value)}
+                            onChange={(e) =>
+                              handleCheckboxChange(column.id, value, e.target.checked)
+                            }
+                            className="w-4 h-4 accent-blue-600"
+                          />
+                          <span className="text-sm text-gray-700">
+                            {String(value)}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
             </div>
           );
         })}

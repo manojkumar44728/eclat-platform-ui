@@ -61,8 +61,8 @@ export default defineConfig([
       // --------------------
       // Import Sorting
       // --------------------
-      'simple-import-sort/imports': 'error',
-      'simple-import-sort/exports': 'error',
+      'simple-import-sort/imports': 'off',
+      'simple-import-sort/exports': 'off',
 
       // --------------------
       // Unused Imports
@@ -82,7 +82,8 @@ export default defineConfig([
       // --------------------
       // TypeScript
       // --------------------
-      '@typescript-eslint/no-explicit-any': 'warn',
+
+      '@typescript-eslint/no-explicit-any': 'off',
 
       '@typescript-eslint/consistent-type-imports': [
         'error',

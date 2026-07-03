@@ -5,6 +5,7 @@ import DataTable from '@/components/common/DataTable/DataTable';
 // import PublicRoute from '@/app/routes/PublicRoute';
 import AppLayout from '@/components/layout/AppLayout';
 import LoginPage from '@/features/auth/LoginPage';
+import { ListView } from '@/components/ui/ListView';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -19,7 +20,7 @@ export const router = createBrowserRouter([
 
     {
     path: '/table',
-    element: <DataTable />,
+    element: <ListView />,
   },
 
   // App Routes
